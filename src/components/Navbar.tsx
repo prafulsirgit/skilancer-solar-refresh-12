@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Phone, Sun } from 'lucide-react';
 
 const navLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'Technology', href: '#technology' },
-  { name: 'Services', href: '#services' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'About Us', href: '#about' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Home', href: '/#home', isAnchor: true },
+  { name: 'Technology', href: '/#technology', isAnchor: true },
+  { name: 'Services', href: '/#services', isAnchor: true },
+  { name: 'Projects', href: '/#projects', isAnchor: true },
+  { name: 'About Us', href: '/#about', isAnchor: true },
+  { name: 'Careers', href: '/careers', isAnchor: false },
+  { name: 'Contact', href: '/#contact', isAnchor: true },
 ];
 
 export const Navbar = () => {
@@ -46,15 +48,27 @@ export const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className={`font-medium text-sm transition-colors hover:text-primary ${
-                  isScrolled ? 'text-foreground' : 'text-card/90'
-                }`}
-              >
-                {link.name}
-              </a>
+              link.isAnchor ? (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className={`font-medium text-sm transition-colors hover:text-primary ${
+                    isScrolled ? 'text-foreground' : 'text-card/90'
+                  }`}
+                >
+                  {link.name}
+                </a>
+              ) : (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className={`font-medium text-sm transition-colors hover:text-primary ${
+                    isScrolled ? 'text-foreground' : 'text-card/90'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              )
             ))}
           </div>
 
@@ -88,14 +102,25 @@ export const Navbar = () => {
           <div className="lg:hidden absolute top-full left-0 right-0 bg-card/98 backdrop-blur-lg shadow-elevated animate-slide-in">
             <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
               {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-foreground font-medium py-2 hover:text-primary transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </a>
+                link.isAnchor ? (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="text-foreground font-medium py-2 hover:text-primary transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className="text-foreground font-medium py-2 hover:text-primary transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                )
               ))}
               <Button variant="default" className="mt-4">
                 Contact Us
