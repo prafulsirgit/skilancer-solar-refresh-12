@@ -9,7 +9,6 @@ const navLinks = [
   { name: 'Services', href: '/#services', isAnchor: true },
   { name: 'Projects', href: '/#projects', isAnchor: true },
   { name: 'About Us', href: '/#about', isAnchor: true },
-  { name: 'Careers', href: '/careers', isAnchor: false },
   { name: 'Contact', href: '/#contact', isAnchor: true },
 ];
 
